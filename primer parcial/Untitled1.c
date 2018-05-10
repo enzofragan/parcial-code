@@ -489,3 +489,40 @@
             min=numero;
             flag=1;
         }///maximo y minimo
+
+
+        mostrarUnoAMuchos(lista1,TAM1,lista2,TAM2);
+
+        void mostrarUnoAMuchos(estructura1 uno[], int TAM1, estructura2 muchos[], int TAM2)
+{
+    int i;
+    int j;
+    for(i=0;i<TAM1;i++)///mostrar de todos los usuario una sola serie
+    {
+        for(j=0;j<TAM2;j++)
+        {
+            if(uno[i].estado!=0 && muchos[j].estado!=0)
+            {
+                if(uno[i].idSerie==muchos[j].idSerie)
+                {
+                    printf("\n%d %s %s\n",uno[i].idUsuario,uno[i].nombre,muchos[j].nombre);///depende de lo que se quiera mostrar
+                    break;
+                }
+            }
+        }
+    }
+    for(i=0;i<TAM1;i++)///al reves
+    {
+        for(j=0;j<TAM2;j++)
+        {
+            if(muchos[j].estado!=0 && uno[i].estado!=0)
+            {
+                if(muchos[j].idSerie==uno[i].idSerie)
+                {
+                    printf("\n%d %s %s %d %s\n",muchos[j].idSerie,muchos[j].nombre,muchos[j].genero,muchos[j].cantidadTemporadas,uno[i].nombre);
+                    break;
+                }
+            }
+        }
+    }
+}
