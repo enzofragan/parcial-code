@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1525963472 source:d:\fragan\primer_parcial_enzo_fragan\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1525963791 d:\fragan\primer_parcial_enzo_fragan\funciones.h
+	"auto.h"
+
+1525963807 source:d:\fragan\primer_parcial_enzo_fragan\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1525964686 d:\fragan\primer_parcial_enzo_fragan\auto.h
+
+1525964686 source:d:\fragan\primer_parcial_enzo_fragan\auto.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"auto.h"
+
