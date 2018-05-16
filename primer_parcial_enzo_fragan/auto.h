@@ -1,5 +1,6 @@
 #ifndef AUTO_H_INCLUDED
 #define AUTO_H_INCLUDED
+#include "funciones.h"
 
 typedef struct
 {
@@ -21,3 +22,5 @@ int eAu_autoIncrementar(eAuto listaA[],int limite);
 int eAu_mostrarSolo(eAuto listaA);
 
 int eAu_mostrarLista(eAuto listaA[],int limite);
+
+int Aalta(eAuto listaA[],ePropietario listaP[],int limite,int ALPHA_ROMEO,int FERRARI,int AUDI,int OTROS);

@@ -18,13 +18,13 @@ int inicio(ePropietario lista[],int limite)///inicia los valores
         for(i=0; i<limite; i++)
         {
            lista[i].estado= 0;///1=libre  0=ocupado
-           lista[i].idPropietario=id[i];
+            lista[i].idPropietario=id[i];
            strcpy(lista[i].nombre,nombre[i]);
             strcpy(lista[i].tarjeta,tarjeta[i]);
             strcpy(lista[i].direccion,direccion[i]);
            /*lista[i].idPropietario=0;
            strcpy(lista[i].direccion,"");
-           lista[i].tarjeta=0;
+           strcpy(lista[i].tarjeta,"");
            strcpy(lista[i].nombre,"");
            strcpy(lista[i].apellido,"");*/
         }
@@ -116,13 +116,9 @@ int buscar(ePropietario lista[],int limite)///busca el usuario para la baja o mo
     }
     id = atoi(auxId);///los combierte a numero (atoi)
 
-    printf("ingrese la tarjeta: ");
-    fflush(stdin);
-    gets(auxTarj);
-
     for (i=0;i<limite;i++)
     {
-        if(id==lista[i].idPropietario && strcmp(auxTarj,lista[i].tarjeta)==0)///si son iguales lo encontro
+        if(id==lista[i].idPropietario)///si son iguales lo encontro
         {
             indice=id;///de vuelve el id encontrado
             break;
@@ -146,7 +142,6 @@ int alta(ePropietario lista[],int limite)///pide un nuevo usuario
         i=lugarLibre(lista,limite);///si encuentra un lugar libre
         if(i>=0)
         {
-            printf("hoal");
             idPropietario=autoIncrementar(lista,limite);///pasa al id del siguiente al original
 
             printf("ingrese el nombre: ");///pide el nombre y valida
@@ -296,51 +291,6 @@ int baja(ePropietario lista[],int limite)///pide se desea dar de baja un usuario
         }
     }
     return indice;
-}
-
-int Aalta(eAuto listaA[],ePropietario listaP[],int limite)
-{
-    int busquedaB;
-    int indice=0;
-    int idAuto;
-    int i;
-
-    busquedaB=buscar(lista,limite);///busca el usuario
-
-     for(i=0;i<limite;i++)
-    {
-        if(busquedaB>=0 && lista[i].idPropietario==busquedaB)///si esta y el id es el mismo que el original
-        {
-            i=lugarLibre(lista,limite);///si encuentra un lugar libre
-                if(i>=0)
-                {
-                    idAuto=autoIncrementar(listaA,limite);///pasa al id del siguiente al original
-
-                    printf("ingrese el nombre: ");///pide el nombre y valida
-                    fflush(stdin);
-                    gets(lista[i].nombre);
-                    while(letraV(listaA[i].patente)==0)
-                    {
-                        printf("ingrese un nombre valido: ");
-                        fflush(stdin);
-                        gets(listaA[i].patente);
-                    }
-
-                    printf("ingrese el apellido: ");///pide el apellido y valida
-                    fflush(stdin);
-                    scanf("%d",&listaA[i].marca);
-
-
-                    listaA[i].propietario=busquedaB;///la id que se guarda es la que devuelve la funcion anterio
-                    lista[i].estado=0;///cambiar el estado a ocupado
-                    mostrarSolo(lista[i]);///muestra lo ingresado
-                    retorno=0;
-                }
-
-            }
-            return retorno;
-        }
-    }
 }
 
 int numeroV(char num[])///valida el numero con un char

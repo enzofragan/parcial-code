@@ -1,6 +1,5 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
-#include "auto.h"
 
 typedef struct
 {
@@ -30,16 +29,12 @@ int buscar(ePropietario lista[],int limite);
 
 int alta(ePropietario lista[],int limite);
 
-int Aalta(eAuto listaA[],ePropietario listaP[],int limite);
-
-
 int modificacion(ePropietario lista[],int limite);
 
-
 int baja(ePropietario lista[],int limite);
-
 
 int numeroV(char num[]);
 
 int letraV(char nom[]);
 
+int letras(char nom[]);

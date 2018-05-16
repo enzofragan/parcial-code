@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "funciones.h"
+#include "auto.h"
 #define tam 20
 #define ALPHA_ROMEO 1
 #define FERRARI 2
@@ -27,12 +27,12 @@ int main()
         printf("1- alta del propietario\n");
         printf("2- modificacion del propietario\n");
         printf("3- baja del propietario\n");
-        printf("4- mostar\n");
-        /*printf("5- \n");
-        printf("6- \n");
-        printf("7- \n");
-        printf("8- \n");*/
-        printf("6- Salir\n");
+        printf("4- mostar propietario\n");
+        printf("5- alta auto del propietario\n");
+       // printf("6- \n");
+        //printf("7- \n");
+        printf("8- mostrar autos\n");
+        printf("9- Salir\n");
         scanf("%d",&opcion);
 
      switch(opcion)
@@ -97,8 +97,8 @@ int main()
             listado=mostrarLista(listaPropietario,tam);
             if(listado==0)
             {
-                valorAutoAlta=baja(listaPropietario,tam);///pide la baja
-                if(valorBaja>=0)
+                valorAutoAlta=Aalta(listaAutos,listaPropietario,tam,ALPHA_ROMEO,FERRARI,AUDI,OTROS);
+                if(valorAutoAlta>=0)
                 {
                     printf("\ncompleto\n");
                 }
@@ -113,7 +113,11 @@ int main()
             }
         break;
 
-        case 6:
+        case 8:
+            eAu_mostrarLista(listaAutos,tam);
+        break;
+
+        case 9:
             //salir
             printf("Desea salir S/N? \n");
             fflush(stdin);
