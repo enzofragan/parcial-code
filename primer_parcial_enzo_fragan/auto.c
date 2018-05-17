@@ -8,7 +8,6 @@ int eAu_inicio(eAuto listaA[],int limite)
     int retorno=-1;
     int i;
 
-
     if(limite>0)
     {
         retorno=0;
@@ -22,6 +21,30 @@ int eAu_inicio(eAuto listaA[],int limite)
     }
     return retorno;
 }
+
+int eEg_inicio(eEgreso egreso[],int limite)
+{
+    int retorno=-1;
+    int i;
+
+
+    if(limite>0)
+    {
+        retorno=0;
+        for(i=0; i<10; i++)
+        {
+            egreso[i].estado=1;
+            egreso[i].cont=0;
+            strcpy(egreso[i].patente,"");
+            egreso[i].importe=0;
+            egreso[i].marca=0;
+            egreso[i].tiempo=0;
+            egreso[i].propietario=0;
+        }
+    }
+    return retorno;
+}
+
 
 int eAu_lugarLibre(eAuto listaA[], int limite)
 {
@@ -88,7 +111,7 @@ int eAu_mostrarLista(eAuto listaA[],int limite)
     return retorno;
 }
 
-int Aalta(eAuto listaA[],ePropietario listaP[],int limite,int ALPHA_ROMEO,int FERRARI,int AUDI,int OTROS)
+int Aalta(eAuto listaA[],eEgreso egreso[],ePropietario listaP[],int limite,int ALPHA_ROMEO,int FERRARI,int AUDI,int OTROS)
 {
     int busquedaB;
     int idAuto;
@@ -101,7 +124,7 @@ int Aalta(eAuto listaA[],ePropietario listaP[],int limite,int ALPHA_ROMEO,int FE
 
     for(i=0;i<limite;i++)
     {
-        if(busquedaB>=0 )//&& listaP[i].idPropietario==busquedaB)///si esta y el id es el mismo que el original
+        if(busquedaB>=0)//&& listaP[i].idPropietario==busquedaB)///si esta y el id es el mismo que el original
         {
             i=eAu_lugarLibre(listaA,limite);///si encuentra un lugar libre
             if(i>=0)
@@ -184,10 +207,27 @@ int Aalta(eAuto listaA[],ePropietario listaP[],int limite,int ALPHA_ROMEO,int FE
                 listaA[i].propietario=busquedaB;///la id que se guarda es la que devuelve la funcion anterio
                 listaA[i].estado=0;///cambiar el estado a ocupado
                 eAu_mostrarSolo(listaA[i]);///muestra lo ingresado
+                eEg_trans(egreso,listaA,limite);
                 retorno=0;
             }
 
         }
         return retorno;
     }
+}
+
+void eEg_trans(eEgreso egreso[],eAuto listaA[],int limite)
+{
+    int i;
+
+    for(i=0;i<limite;i++)
+    {
+        egreso[i].estado=0;
+        strcpy(egreso[i].patente,listaA[i].patente);
+        egreso[i].marca=listaA[i].marca;
+        printf("%d",egreso[i].marca);
+        egreso[i].propietario=listaA[i].propietario;
+    }
+        printf("%s----------%d-----------%d",egreso[i].patente,egreso[i].marca,egreso[i].propietario);
+
 }

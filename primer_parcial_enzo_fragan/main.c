@@ -19,8 +19,12 @@ int main()
     int listado;
     ePropietario listaPropietario[tam];
     inicio(listaPropietario,tam);///inicializa los valores
+
     eAuto listaAutos[tam];
     eAu_inicio(listaAutos,tam);
+
+    eEgreso egresoAuto[tam];
+    eEg_inicio(egresoAuto,tam);
 
     do
     {
@@ -97,7 +101,7 @@ int main()
             listado=mostrarLista(listaPropietario,tam);
             if(listado==0)
             {
-                valorAutoAlta=Aalta(listaAutos,listaPropietario,tam,ALPHA_ROMEO,FERRARI,AUDI,OTROS);
+                valorAutoAlta=Aalta(listaAutos,egresoAuto,listaPropietario,tam,ALPHA_ROMEO,FERRARI,AUDI,OTROS);
                 if(valorAutoAlta>=0)
                 {
                     printf("\ncompleto\n");
