@@ -45,3 +45,26 @@
 	<string.h>
 	"auto.h"
 
+1531075342 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\auto.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"auto.h"
+
+1531079622 c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\auto.h
+	"funciones.h"
+
+1531075342 c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\funciones.h
+
+1531075342 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1531075342 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"auto.h"
+

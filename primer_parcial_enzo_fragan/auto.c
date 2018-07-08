@@ -151,19 +151,19 @@ int Aalta(eAuto listaA[],eEgreso egreso[],ePropietario listaP[],int limite,int A
                 switch(indice)
                 {
                     case 1:
-                        marca=ALPHA_ROMEO;
+                        marca=1;
                         break;
 
                     case 2:
-                        marca=FERRARI;
+                        marca=2;
                         break;
 
                     case 3:
-                        marca=AUDI;
+                        marca=3;
                         break;
 
                     case 4:
-                        marca=OTROS;
+                        marca=4;
                         break;
 
                     default:
@@ -207,7 +207,7 @@ int Aalta(eAuto listaA[],eEgreso egreso[],ePropietario listaP[],int limite,int A
                 listaA[i].propietario=busquedaB;///la id que se guarda es la que devuelve la funcion anterio
                 listaA[i].estado=0;///cambiar el estado a ocupado
                 eAu_mostrarSolo(listaA[i]);///muestra lo ingresado
-                eEg_trans(egreso,listaA,limite);
+                eEg_trans(egreso,listaA,i,limite);
                 retorno=0;
             }
 
@@ -216,18 +216,21 @@ int Aalta(eAuto listaA[],eEgreso egreso[],ePropietario listaP[],int limite,int A
     }
 }
 
-void eEg_trans(eEgreso egreso[],eAuto listaA[],int limite)
+void eEg_trans(eEgreso egreso[],eAuto listaA[],int indice,int limite)
 {
     int i;
+    int marca;
+    int propie;
 
     for(i=0;i<limite;i++)
     {
         egreso[i].estado=0;
-        strcpy(egreso[i].patente,listaA[i].patente);
-        egreso[i].marca=listaA[i].marca;
-        printf("%d",egreso[i].marca);
-        egreso[i].propietario=listaA[i].propietario;
+        strcpy(egreso[i].patente,listaA[indice].patente);
+        marca=listaA[indice].marca;
+        propie=listaA[indice].propietario;
+        egreso[indice].marca=marca;
+        egreso[indice].propietario=propie;
     }
-        printf("%s----------%d-----------%d",egreso[i].patente,egreso[i].marca,egreso[i].propietario);
+        printf("%s----------%d-----------%d",egreso[indice].patente,egreso[indice].marca,egreso[indice].propietario);
 
 }

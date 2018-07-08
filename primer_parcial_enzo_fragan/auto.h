@@ -39,6 +39,6 @@ int Aalta(eAuto listaA[],eEgreso egreso[],ePropietario listaP[],int limite,int A
 
 int eEg_inicio(eEgreso egreso[],int limite);
 
-void eEg_trans(eEgreso egreso[],eAuto listaA[],int limite);
+void eEg_trans(eEgreso egreso[],eAuto listaA[],int indice,int limite);
 
 int eEg_lugarLibre(eEgreso egreso[], int limite);
