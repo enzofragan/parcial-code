@@ -48,7 +48,8 @@ int main()
         printf("14- mostrar por edad\n");
         printf("15- mostrar ticket maximo\n");
         printf("16- mostrar propietario mas de un estacionado\n");
-        printf("17- Salir\n");
+        printf("17- mostrar propietario mas de un estacionado con distintos autos\n");
+        printf("18- Salir\n");
         scanf("%d",&opcion);
 
      switch(opcion)
@@ -210,6 +211,10 @@ int main()
         break;
 
         case 17:
+            eAu_propientarioMasDeUnoDistinto(listaAutos,tam,listaPropietario);
+        break;
+
+        case 18:
             //salir
             printf("Desea salir S/N? \n");
             fflush(stdin);

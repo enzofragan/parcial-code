@@ -616,10 +616,10 @@ int eAu_propientarioMasDeUno(eAuto listaA[],int limite,ePropietario listaP[])
 {
     int retorno = -2;
     int i;
-    int contAlphaRomeo=0;
-    int contFerrari=0;
-    int contAudi=0;
-    int contOtro=0;
+    int contPrimero=0;
+    int contSegundo=0;
+    int contTercero=0;
+    int contCuarto=0;
 
     for (i=0;i<limite;i++)
     {
@@ -628,35 +628,92 @@ int eAu_propientarioMasDeUno(eAuto listaA[],int limite,ePropietario listaP[])
            switch(listaA[i].propietario)
             {
                 case 1:
-                    contAlphaRomeo++;
-                    if(contAlphaRomeo>=2)
+                    contPrimero++;
+                    if(contPrimero>=2)
                     {
                         printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
                     }
                     break;
                 case 2:
-                    contFerrari++;
-                    if(contFerrari>=2)
+                    contSegundo++;
+                    if(contSegundo>=2)
                     {
                         printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
                     }
                     break;
                 case 3:
-                    contAudi++;
-                    if(contAudi>=2)
+                    contTercero++;
+                    if(contTercero>=2)
                     {
                         printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
                     }
                     break;
                 case 4:
-                    contOtro++;
-                    if(contOtro>=2)
+                    contCuarto++;
+                    if(contCuarto>=2)
                     {
                         printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
                     }
                     break;
             }
         }
+    }
+    retorno = 0;
+    return retorno;
+}
+int eAu_propientarioMasDeUnoDistinto(eAuto listaA[],int limite,ePropietario listaP[])
+{
+    int retorno = -2;
+    int i;
+    int j;
+    int contPrimero=0;
+    int contSegundo=0;
+    int contTercero=0;
+    int contCuarto=0;
+
+    for (i=0;i<limite-1;i++)
+    {
+        for(j=i+1;j<limite;j++)
+        {
+            if(listaP[i].estado==0 && listaP[i].edad>0 && listaP[i].edad<100)
+            {
+                if(listaA[i].marca!=listaA[j].marca)
+                {
+                    switch(listaA[i].propietario)
+                    {
+                        case 1:
+                            contPrimero++;
+                            if(contPrimero>1)
+                            {
+                                printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                            }
+                            break;
+                        case 2:
+                            contSegundo++;
+                            if(contSegundo>1)
+                            {
+                                printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                            }
+                            break;
+                        case 3:
+                            contTercero++;
+                            if(contTercero>1)
+                            {
+                                printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                            }
+                            break;
+                        case 4:
+                            contCuarto++;
+                            if(contCuarto>1)
+                            {
+                                printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+
     }
     retorno = 0;
     return retorno;
