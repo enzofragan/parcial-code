@@ -11,6 +11,7 @@ int inicio(ePropietario lista[],int limite)///inicia los valores
     char nombre[5][20]= {"Juan","Luis","Maria","Jose"};
     char tarjeta[5][20]= {"111-111","222-222","333-333","444-444"};
     char direccion[5][20]= {"mitre","urquiza","belgrano","alsina"};
+    int edad[5]={12,20,18,15};
 
     if(limite>0)
     {
@@ -22,7 +23,9 @@ int inicio(ePropietario lista[],int limite)///inicia los valores
            strcpy(lista[i].nombre,nombre[i]);
             strcpy(lista[i].tarjeta,tarjeta[i]);
             strcpy(lista[i].direccion,direccion[i]);
-           /*lista[i].idPropietario=0;
+            lista[i].edad=edad[i];
+            /*lista[i].edad=0;
+           lista[i].idPropietario=0;
            strcpy(lista[i].direccion,"");
            strcpy(lista[i].tarjeta,"");
            strcpy(lista[i].nombre,"");
@@ -75,7 +78,7 @@ int autoIncrementar(ePropietario lista[],int limite)///id auto incrementable
 
 int mostrarSolo(ePropietario lista)///muestra el usuario guardado
 {
-    printf("\n%d---%s---%s---%s---%s\n",lista.idPropietario,lista.nombre,lista.apellido,lista.direccion,lista.tarjeta);
+    printf("\n%d---%s---%s---%s---%s---%d\n",lista.idPropietario,lista.nombre,lista.apellido,lista.direccion,lista.tarjeta,lista.edad);
 }
 
 int mostrarLista(ePropietario lista[],int limite)///mostra la lista de usuario
@@ -136,6 +139,8 @@ int alta(ePropietario lista[],int limite)///pide un nuevo usuario
     int retorno=-1;
     int idPropietario;
     int i;
+    char auxEdad[10];
+    int edad;
     if(limite>0 && lista != NULL)
     {
         retorno=-2;
@@ -172,7 +177,21 @@ int alta(ePropietario lista[],int limite)///pide un nuevo usuario
             fflush(stdin);
             gets(lista[i].tarjeta);
 
+            printf("ingrese la edad:");///pide el numero de tarjeta
+            fflush(stdin);
+            gets(auxEdad);
+
+            while(numeroV(auxEdad)==0)
+            {
+                printf("ingrese una edad valida:");///pide el numero de tarjeta
+                fflush(stdin);
+                gets(auxEdad);
+            }
+
+            edad=atoi(auxEdad);
+
             lista[i].idPropietario=idPropietario;///la id que se guarda es la que devuelve la funcion anterio
+            lista[i].edad=edad;
             lista[i].estado=0;///cambiar el estado a ocupado
             mostrarSolo(lista[i]);///muestra lo ingresado
             retorno=0;
@@ -281,6 +300,7 @@ int baja(ePropietario lista[],int limite)///pide se desea dar de baja un usuario
                 strcpy(lista[i].apellido,"");
                 strcpy(lista[i].direccion,"");
                 strcpy(lista[i].tarjeta,"");
+                lista[i].edad=0;
 
                 mostrarLista(lista,limite);
             }
@@ -319,4 +339,81 @@ int letraV(char nom[])///valida el nombre y apellido
         i++;
     }
     return 1;
+}
+
+int mostrarListaPorNombre(ePropietario lista[],int limite,int orden)
+{
+    int retorno = -3;
+    int i;
+    int j;
+    ePropietario aux;
+
+    retorno = -2;
+
+    for(i=0;i<limite-1;i++)
+    {
+        if(lista[i].estado == 0)///0=ascendente 1=descendente
+        {
+            for(j=i+1;j<limite;j++)
+            {
+                if(lista[j].estado == 0)
+                {
+                    if(orden==0)
+                    {
+                        if ( strcmp(lista[i].nombre, lista[j].nombre) > 0 )
+                        {
+                            aux = lista[i];
+                            lista[i] = lista[j];
+                            lista[j] = aux;
+                        }
+                    }
+                    if (orden==1)
+                    {
+                        if ( strcmp(lista[i].nombre, lista[j].nombre) < 1 )
+                        {
+                            aux = lista[i];
+                            lista[i] = lista[j];
+                            lista[j] = aux;
+                        }
+                    }
+
+
+                        retorno = -1;
+                }
+            }
+
+        }
+
+    }
+
+
+    for(i=0;i<limite;i++)
+    {
+        if(lista[i].estado == 0 && lista[i].idPropietario>=1 && lista[i].idPropietario<=4)
+        {
+            retorno = 0;
+            mostrarSolo(lista[i]);
+        }
+    }
+
+    return retorno;
+}
+
+int mostrarListaPorEdad(ePropietario lista[],int limite)
+{
+    int retorno = -1;
+    int i;
+    if(limite > 0 && lista != NULL)///si no obrepara el limite y halla algo en la lista
+    {
+        retorno = 0;
+
+        for(i=0; i<limite; i++)
+        {
+            if(lista[i].estado==0 && lista[i].idPropietario>=1 && lista[i].idPropietario<=4 && lista[i].edad>=18 && lista[i].edad<100)///si esta coupado lo muestra o contiene informacion
+            {
+                mostrarSolo(lista[i]);
+            }
+        }
+    }
+    return retorno;
 }

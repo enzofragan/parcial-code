@@ -8,6 +8,7 @@ typedef struct
     char nombre[50];
     char apellido[50];
     char tarjeta[50];
+    int edad;
     int estado;
 
 }ePropietario;
@@ -26,6 +27,9 @@ int mostrarLista(ePropietario lista[],int limite);
 
 int buscar(ePropietario lista[],int limite);
 
+int mostrarListaPorNombre(ePropietario lista[],int limite,int orden);
+
+int mostrarListaPorEdad(ePropietario lista[],int limite);
 
 int alta(ePropietario lista[],int limite);
 

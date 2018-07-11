@@ -54,3 +54,9 @@ int eAu_buscarId(eAuto listaA[],int limite);
 int eEg_recaudacionTotal(eEgreso egreso[],int limite);
 
 int eEg_recaudacionTotalPorMarca(eEgreso egreso[],int limite);
+
+int eAu_propietarioDeAutos(eAuto listaA[],int limite,ePropietario listaP[]);
+
+int eAu_mostrarListaDeAudi(eAuto listaA[],int limite,ePropietario listaP[],eEgreso egreso[]);
+
+int eAu_mostrarListaPorPatente(eAuto listaA[],int limite);

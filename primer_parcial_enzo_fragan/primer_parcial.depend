@@ -45,24 +45,24 @@
 	<string.h>
 	"auto.h"
 
-1531278210 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\auto.c
+1531283850 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\auto.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"auto.h"
 
-1531278181 c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\auto.h
+1531280843 c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\auto.h
 	"funciones.h"
 
-1531075342 c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\funciones.h
+1531283850 c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\funciones.h
 
-1531075342 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\funciones.c
+1531283850 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"funciones.h"
 
-1531278181 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\main.c
+1531282071 source:c:\users\administrador\desktop\parcial-code\primer_parcial_enzo_fragan\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

@@ -456,7 +456,101 @@ int eEg_recaudacionTotalPorMarca(eEgreso egreso[],int limite)
 
     retorno = 0;
     return retorno;
+}
 
+int eAu_propietarioDeAutos(eAuto listaA[],int limite,ePropietario listaP[])
+{
+    int retorno = -1;
+    int i;
+    int id;
+    int flag=0;
+
+    id = buscar(listaP,limite);
+
+    for(i=0;i<limite;i++)
+    {
+        if(listaA[i].propietario == listaP[id-1].idPropietario)
+        {
+            if(flag == 0)
+            {
+                printf("\nid patente cliente marca\n");
+                flag = 1;
+            }
+
+            eAu_mostrarSolo(listaA[i]);
+
+        }
+    }
+    retorno = 0;
+
+    if(flag == 0)
+    {
+        printf("\nEL PROPIETARIO NO TIENE AUTOS ESTACIONADOS EN ESTE MOMENTO.\n");
+        retorno = 1;
+    }
+
+    return retorno;
+}
+
+int eAu_mostrarListaDeAudi(eAuto listaA[],int limite,ePropietario listaP[],eEgreso egreso[])
+{
+    int i;
+
+    for(i=0;i<limite;i++)
+    {
+        if(listaA[i].marca==3 && listaP[i].idPropietario>0 && listaP[i].idPropietario<=4)
+        {
+            printf("\n%d---%s---%s---%s---%s---%s---%d---%.0f\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaA[i].patente,listaA[i].marca,egreso[i].importe);
+        }
+    }
+
+    return 0;
+}
+
+int eAu_mostrarListaPorPatente(eAuto listaA[],int limite)
+{
+    int retorno = -3;
+
+    int i;
+    int j;
+    eAuto aux;
+
+    retorno = -2;
+
+    for(i=0;i<limite-1;i++)
+    {
+        if(listaA[i].estado == 0)
+        {
+            for(j=i+1;j<limite;j++)
+            {
+                if(listaA[j].estado == 0)
+                {
+                    if ( strcmp(listaA[i].patente, listaA[j].patente) > 0 )
+                    {
+                        aux = listaA[i];
+                        listaA[i] = listaA[j];
+                        listaA[j] = aux;
+
+                        retorno = -1;
+                    }
+                }
+
+            }
+
+        }
+    }
+
+
+    for(i=0;i<limite;i++)
+    {
+        if(listaA[i].estado == 0)
+        {
+            retorno = 0;
+            eAu_mostrarSolo(listaA[i]);
+        }
+    }
+
+    return retorno;
 }
 
 int eAu_buscarId(eAuto listaA[],int limite)

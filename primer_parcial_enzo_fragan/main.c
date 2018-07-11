@@ -19,6 +19,8 @@ int main()
     int listado;
     int valorAutoEgreso;
     int listadoA;
+    int valorAutoLista;
+    int orden;
     ePropietario listaPropietario[tam];
     inicio(listaPropietario,tam);///inicializa los valores
 
@@ -39,7 +41,12 @@ int main()
         printf("7- mostrar autos\n");
         printf("8- mostrar recaudacion total\n");
         printf("9- mostrar recaudado por marca\n");
-        printf("10- Salir\n");
+        printf("10- mostrar autos del propietario\n");
+        printf("11- mostrar infor de audi\n");
+        printf("12- mostrar autos por patente\n");
+        printf("13- mostrar propietario por nombre\n");
+        printf("14- mostrar por edad\n");
+        printf("15- Salir\n");
         scanf("%d",&opcion);
 
      switch(opcion)
@@ -154,6 +161,45 @@ int main()
         break;
 
         case 10:
+            listado=mostrarLista(listaPropietario,tam);
+            listadoA=eAu_mostrarLista(listaAutos,tam);
+            if(listado==0 && listadoA==0)
+            {
+                valorAutoLista=eAu_propietarioDeAutos(listaAutos,tam,listaPropietario);
+                if(valorAutoEgreso>=0)
+                {
+                    printf("\ncompleto\n");
+                }
+                else
+                {
+                    printf("\ninvalidado\n");
+                }
+            }
+            else
+            {
+                printf("\ningrese algun dato primero\n");
+            }
+        break;
+
+        case 11:
+            eAu_mostrarListaDeAudi(listaAutos,tam,listaPropietario,egresoAuto);
+        break;
+
+        case 12:
+            eAu_mostrarListaPorPatente(listaAutos,tam);
+        break;
+
+        case 13:
+            printf("en que orden quiere la lista? 0=ascendente 1=descendente\n");
+            scanf("%d",&orden);
+            mostrarListaPorNombre(listaPropietario,tam,orden);
+        break;
+
+        case 14:
+            mostrarListaPorEdad(listaPropietario,tam);
+        break;
+
+        case 15:
             //salir
             printf("Desea salir S/N? \n");
             fflush(stdin);
