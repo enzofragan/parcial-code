@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "auto.h"
-#define tam 20
+#define tam 10
 #define ALPHA_ROMEO 1
 #define FERRARI 2
 #define AUDI 3
@@ -17,6 +17,8 @@ int main()
     int valorModificacion;
     int valorAutoAlta;
     int listado;
+    int valorAutoEgreso;
+    int listadoA;
     ePropietario listaPropietario[tam];
     inicio(listaPropietario,tam);///inicializa los valores
 
@@ -33,10 +35,11 @@ int main()
         printf("3- baja del propietario\n");
         printf("4- mostar propietario\n");
         printf("5- alta auto del propietario\n");
-       // printf("6- \n");
-        //printf("7- \n");
-        printf("8- mostrar autos\n");
-        printf("9- Salir\n");
+        printf("6- egreso de auto\n");
+        printf("7- mostrar autos\n");
+        printf("8- mostrar recaudacion total\n");
+        printf("9- mostrar recaudado por marca\n");
+        printf("10- Salir\n");
         scanf("%d",&opcion);
 
      switch(opcion)
@@ -117,11 +120,40 @@ int main()
             }
         break;
 
-        case 8:
+        case 6:
+            listado=mostrarLista(listaPropietario,tam);
+            listadoA=eAu_mostrarLista(listaAutos,tam);
+            if(listado==0 && listadoA==0)
+            {
+                valorAutoEgreso=Aegreso(listaAutos,egresoAuto,tam,listaPropietario);
+                if(valorAutoEgreso>=0)
+                {
+                    printf("\ncompleto\n");
+                }
+                else
+                {
+                    printf("\ninvalidado\n");
+                }
+            }
+            else
+            {
+                printf("\ningrese algun dato primero\n");
+            }
+        break;
+
+        case 7:
             eAu_mostrarLista(listaAutos,tam);
         break;
 
+        case 8:
+            eEg_recaudacionTotal(egresoAuto,tam);
+        break;
+
         case 9:
+            eEg_recaudacionTotalPorMarca(egresoAuto,tam);
+        break;
+
+        case 10:
             //salir
             printf("Desea salir S/N? \n");
             fflush(stdin);

@@ -8,15 +8,24 @@ int eAu_inicio(eAuto listaA[],int limite)
     int retorno=-1;
     int i;
 
+    int id[10]= {1,2,3,4,5,6,7,8,9,10};
+    char patente[10][20]= {"AAA","CCC","DDD","BBB","ZZZ","III","HHH","EEE","FFF","GGG"};
+    int marca[10]= {1,3,3,2,2,3,3,4,3,1};
+    int propietario[10]= {2,1,2,1,3,3,4,1,4,3};
+
     if(limite>0)
     {
         retorno=0;
         for(i=0; i<limite; i++)
         {
-            listaA[i].estado=1;
-            strcpy(listaA[i].patente,"");
+            listaA[i].estado=0;
+            strcpy(listaA[i].patente,patente[i]);
+            listaA[i].marca=marca[i];
+            listaA[i].propietario=propietario[i];
+            listaA[i].idAuto=id[i];
+            /*strcpy(listaA[i].patente,"");
             listaA[i].marca=0;
-            listaA[i].propietario=0;
+            listaA[i].propietario=0;*/
         }
     }
     return retorno;
@@ -27,6 +36,8 @@ int eEg_inicio(eEgreso egreso[],int limite)
     int retorno=-1;
     int i;
 
+    int marca[10]= {1,1,2,3,2,2,3,4,1,1};
+    float importe[10]= {100,200,100,300,100,100,200,200,100,100};
 
     if(limite>0)
     {
@@ -34,12 +45,10 @@ int eEg_inicio(eEgreso egreso[],int limite)
         for(i=0; i<10; i++)
         {
             egreso[i].estado=1;
-            egreso[i].cont=0;
-            strcpy(egreso[i].patente,"");
-            egreso[i].importe=0;
-            egreso[i].marca=0;
-            egreso[i].tiempo=0;
-            egreso[i].propietario=0;
+            egreso[i].importe=importe[i];
+            egreso[i].marca=marca[i];
+            /*egreso[i].importe=0;
+            egreso[i].marca=0;*/
         }
     }
     return retorno;
@@ -65,6 +74,25 @@ int eAu_lugarLibre(eAuto listaA[], int limite)
     return retorno;
 }
 
+int eEg_lugarLibre(eEgreso egreso[], int limite)
+{
+    int retorno=-1;
+    int i;
+    if(limite>0)///mientras la lista inicie
+    {
+        retorno=-2;
+        for(i=0;i<limite;i++)/// y no sobre pase la limite
+        {
+            if(egreso[i].estado==1)///encontra un lugar libre
+            {
+                retorno=i;///retorna ese lugar
+                break;
+            }
+        }
+    }
+    return retorno;
+}
+
 int eAu_autoIncrementar(eAuto listaA[],int limite)
 {
     int retorno = 0;
@@ -75,11 +103,10 @@ int eAu_autoIncrementar(eAuto listaA[],int limite)
         {
             if(listaA[i].estado == 0)///si el anterior esta ocupado
             {
-                    if(listaA[i].idAuto>retorno)///y esa id sea mayor al retorno
-                    {
-                         retorno=listaA[i].idAuto;///devuelve esa id
-                    }
-
+                if(listaA[i].idAuto>retorno)///y esa id sea mayor al retorno
+                {
+                        retorno=listaA[i].idAuto;///devuelve esa id
+                }
             }
         }
     }
@@ -102,7 +129,7 @@ int eAu_mostrarLista(eAuto listaA[],int limite)
 
         for(i=0; i<limite; i++)
         {
-            if(listaA[i].estado==0)///si esta coupado lo muestra o contiene informacion
+            if(listaA[i].estado==0 && listaA[i].idAuto>=1 && listaA[i].idAuto<=10 && listaA[i].marca>=1 && listaA[i].marca<=4)///si esta coupado lo muestra o contiene informacion
             {
                 eAu_mostrarSolo(listaA[i]);
             }
@@ -110,6 +137,31 @@ int eAu_mostrarLista(eAuto listaA[],int limite)
     }
     return retorno;
 }
+
+int eEg_mostrarSolo(eEgreso egreso)
+{
+    printf("\n%d---%.0f\n",egreso.marca,egreso.importe);
+}
+
+int eEg_mostrarLista(eEgreso egreso[],int limite)
+{
+    int retorno = -1;
+    int i;
+    if(limite > 0 && egreso != NULL)///si no obrepara el limite y halla algo en la listaA
+    {
+        retorno = 0;
+
+        for(i=0; i<limite; i++)
+        {
+            if(egreso[i].estado==0)///si esta coupado lo muestra o contiene informacion
+            {
+                eEg_mostrarSolo(egreso[i]);
+            }
+        }
+    }
+    return retorno;
+}
+
 
 int Aalta(eAuto listaA[],eEgreso egreso[],ePropietario listaP[],int limite,int ALPHA_ROMEO,int FERRARI,int AUDI,int OTROS)
 {
@@ -151,19 +203,19 @@ int Aalta(eAuto listaA[],eEgreso egreso[],ePropietario listaP[],int limite,int A
                 switch(indice)
                 {
                     case 1:
-                        marca=1;
+                        marca=ALPHA_ROMEO;
                         break;
 
                     case 2:
-                        marca=2;
+                        marca=FERRARI;
                         break;
 
                     case 3:
-                        marca=3;
+                        marca=AUDI;
                         break;
 
                     case 4:
-                        marca=4;
+                        marca=OTROS;
                         break;
 
                     default:
@@ -220,17 +272,222 @@ void eEg_trans(eEgreso egreso[],eAuto listaA[],int indice,int limite)
 {
     int i;
     int marca;
-    int propie;
+
+    i=eEg_lugarLibre(egreso,limite);
+
+    if(i>=0)
+    {
+        marca=listaA[i].marca;
+
+        egreso[i].estado=0;
+        egreso[i].marca=marca;
+    }
+}
+
+int devolverHorasEstadia()
+{
+    int horas;
+
+    srand(time(NULL));
+
+    horas = (rand()%24)+1;
+
+    return horas ;
+
+}
+
+int mostrarListaAmbos(eAuto listaA[],eEgreso egreso[],int limite)
+{
+    int retorno = -1;
+    int i;
+    if(limite > 0 && listaA != NULL && egreso != NULL)///si no obrepara el limite y halla algo en la listaA
+    {
+        retorno = 0;
+
+        for(i=0; i<limite; i++)
+        {
+            if(listaA[i].estado==0 && egreso[i].estado==0 && listaA[i].idAuto>=1 && listaA[i].idAuto<=10 && listaA[i].marca>=1 && listaA[i].marca<=4)///si esta coupado lo muestra o contiene informacion
+            {
+                printf("\n%d---%s---%d---%d---%.0f\n",listaA[i].idAuto,listaA[i].patente,listaA[i].propietario,egreso[i].marca,egreso[i].importe);
+            }
+        }
+    }
+    return retorno;
+}
+
+int Aegreso(eAuto listaA[],eEgreso egreso[],int limite,ePropietario listaP[])
+{
+    int busquedaB;
+    int busquedaP;
+    char respuesta;
+    int hora;
+    int importe;
+    int valorH;
+    int indice=0;
+    int i;
+    int j;
+
+    busquedaP=buscar(listaP,limite);
+
+    busquedaB=eAu_buscarId(listaA,limite);///busca el usuario
 
     for(i=0;i<limite;i++)
     {
-        egreso[i].estado=0;
-        strcpy(egreso[i].patente,listaA[indice].patente);
-        marca=listaA[indice].marca;
-        propie=listaA[indice].propietario;
-        egreso[indice].marca=marca;
-        egreso[indice].propietario=propie;
-    }
-        printf("%s----------%d-----------%d",egreso[indice].patente,egreso[indice].marca,egreso[indice].propietario);
+        if(busquedaB>=0 && listaA[i].idAuto==busquedaB && busquedaP>=0 && listaA[i].propietario==busquedaP)///si esta y el id es el mismo que el original
+        {
+            eAu_mostrarSolo(listaA[i]);///muestra el usuario
+            hora=devolverHorasEstadia();
+            switch(listaA[i].marca)
+            {
+                case 1:
+                    valorH=150;
+                    break;
+                case 2:
+                    valorH=175;
+                    break;
+                case 3:
+                    valorH=200;
+                    break;
+                case 4:
+                    valorH=250;
+                    break;
+            }
+            importe=valorH*hora;
+            printf("desea egresar este auto? s/n: \n");///pregunta si lo dara de baja
+            fflush(stdin);
+            respuesta=getche();
+            while(respuesta!='s' && respuesta!='n')///valida
+            {
+                printf("\ningrese un valor valido s/n: \n");
+                fflush(stdin);
+                respuesta=getche();
+            }
+            if(respuesta=='s')///si es si devuelve es valor al inicio y despues muestra
+            {
+                printf("nombre del propietario: %s\npatente del auto: %s\nmarca: %d\nvalor de estadia: %d\n",listaP[i].nombre,listaA[i].patente,listaA[i].marca,importe);
 
+                j=eEg_lugarLibre(egreso,limite);
+
+                egreso[j].marca=listaA[i].marca;
+                egreso[j].importe=importe;
+                egreso[j].estado=0;
+
+                listaA[i].estado=1;
+                listaA[i].idAuto=0;
+                strcpy(listaA[i].patente,"");
+                listaA[i].marca=0;
+                listaA[i].propietario=0;
+
+                eEg_mostrarSolo(egreso[j]);
+            }
+            else if(respuesta=='n')
+            {
+                indice=-1;
+            }
+        }
+    }
+    return indice;
+}
+
+int eEg_recaudacionTotal(eEgreso egreso[],int limite)
+{
+    int retorno = -2;
+    int i;
+    float total=0;
+
+    printf("\ntotal recaudado\n");
+
+    for (i=0;i<limite;i++)
+    {
+        total = total+egreso[i].importe;
+    }
+    retorno = -1;
+
+    printf("\nEl total es de: $%.2f\n", total);
+
+    retorno = 0;
+    return retorno;
+}
+
+int eEg_recaudacionTotalPorMarca(eEgreso egreso[],int limite)
+{
+    int retorno = -2;
+    int i;
+    int contAlphaRomeo=0;
+    int contFerrari=0;
+    int contAudi=0;
+    int contOtro=0;
+    float AlphaRomeo=0;
+    float Ferrari=0;
+    float Audi=0;
+    float Otro=0;
+
+    printf("\nRECAUDACION POR MARCA\n");
+
+    for (i=0;i<limite;i++)
+    {
+        switch(egreso[i].marca)
+        {
+            case 1:
+                AlphaRomeo = AlphaRomeo + egreso[i].importe;
+                contAlphaRomeo++;
+                break;
+            case 2:
+                Ferrari = Ferrari + egreso[i].importe;
+                contFerrari++;
+                break;
+            case 3:
+                Audi = Audi + egreso[i].importe;
+                contAudi++;
+                break;
+            case 4:
+                Otro = Otro + egreso[i].importe;
+                contOtro++;
+                break;
+        }
+    }
+    retorno = -1;
+
+    printf("\nrecaudacion por marca\n");
+    printf("\nALPHA ROMEO\t $ %.2f\tcantidad de autos: %d\n", AlphaRomeo,contAlphaRomeo);
+    printf("\nFERRARI\t\t $ %.2f\tcantidad de autos: %d\n", Ferrari,contFerrari);
+    printf("\nAUDI\t\t $ %.2f\tcantidad de autos: %d\n", Audi,contAudi);
+    printf("\nOTRO\t\t $ %.2f\tcantidad de autos: %d\n", Otro,contOtro);
+
+    retorno = 0;
+    return retorno;
+
+}
+
+int eAu_buscarId(eAuto listaA[],int limite)
+{
+    int id;
+    int indice=-1;
+    int i;
+    char auxId[50];
+
+    printf("ingrese el id del auto: ");
+    fflush(stdin);
+    gets(auxId);///pide el numero com char
+    while(numeroV(auxId)==0)///valida si es numero o no
+    {
+        printf("ingrese un id valido: ");
+        fflush(stdin);
+        gets(auxId);
+    }
+    id = atoi(auxId);///los combierte a numero (atoi)
+
+    for (i=0;i<limite;i++)
+    {
+        if(id==listaA[i].idAuto)///si son iguales lo encontro
+        {
+            indice=id;///de vuelve el id encontrado
+            break;
+        }
+        else
+        {
+            indice=-2;
+        }
+    }
+    return indice;
 }

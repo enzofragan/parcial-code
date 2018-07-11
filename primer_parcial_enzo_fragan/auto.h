@@ -14,11 +14,7 @@ typedef struct
 
 typedef struct
 {
-    int cont;
-    char patente[100];
     int marca;
-    int propietario;
-    int tiempo;
     float importe;
     int estado;
 
@@ -42,3 +38,19 @@ int eEg_inicio(eEgreso egreso[],int limite);
 void eEg_trans(eEgreso egreso[],eAuto listaA[],int indice,int limite);
 
 int eEg_lugarLibre(eEgreso egreso[], int limite);
+
+int eEg_mostrarSolo(eEgreso egreso);
+
+int eEg_mostrarLista(eEgreso egreso[],int limite);
+
+int devolverHorasEstadia();
+
+int mostrarListaAmbos(eAuto listaA[],eEgreso egreso[],int limite);
+
+int Aegreso(eAuto listaA[],eEgreso egreso[],int limite,ePropietario listaP[]);
+
+int eAu_buscarId(eAuto listaA[],int limite);
+
+int eEg_recaudacionTotal(eEgreso egreso[],int limite);
+
+int eEg_recaudacionTotalPorMarca(eEgreso egreso[],int limite);
