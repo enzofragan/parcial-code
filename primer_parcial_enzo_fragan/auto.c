@@ -44,7 +44,7 @@ int eEg_inicio(eEgreso egreso[],int limite)
         retorno=0;
         for(i=0; i<10; i++)
         {
-            egreso[i].estado=1;
+            egreso[i].estado=0;
             egreso[i].importe=importe[i];
             egreso[i].marca=marca[i];
             /*egreso[i].importe=0;
@@ -584,4 +584,80 @@ int eAu_buscarId(eAuto listaA[],int limite)
         }
     }
     return indice;
+}
+
+int eAu_max(eAuto listaA[],int limite,ePropietario listaP[],eEgreso egreso[])
+{
+    int i;
+    int j;
+    int max=0;
+    int hora;
+
+    for(i=0;i<limite;i++)
+    {
+        if(egreso[i].importe>max)
+        {
+            max=egreso[i].importe;
+        }
+    }
+
+    for(j=0;j<limite;j++)
+    {
+        if(egreso[j].estado==0 && egreso[j].importe==max)
+        {
+            hora=devolverHorasEstadia();
+            printf("\n%d---%s---%s---%s---%s---%s---%d---%.0f---%d\n",listaP[j].idPropietario,listaP[j].nombre,listaP[j].apellido,listaP[j].direccion,listaP[j].tarjeta,listaA[j].patente,listaA[j].marca,egreso[j].importe,hora);
+        }
+    }
+
+}
+
+int eAu_propientarioMasDeUno(eAuto listaA[],int limite,ePropietario listaP[])
+{
+    int retorno = -2;
+    int i;
+    int contAlphaRomeo=0;
+    int contFerrari=0;
+    int contAudi=0;
+    int contOtro=0;
+
+    for (i=0;i<limite;i++)
+    {
+        if(listaP[i].estado==0 && listaP[i].edad>0 && listaP[i].edad<100)
+        {
+           switch(listaA[i].propietario)
+            {
+                case 1:
+                    contAlphaRomeo++;
+                    if(contAlphaRomeo>=2)
+                    {
+                        printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                    }
+                    break;
+                case 2:
+                    contFerrari++;
+                    if(contFerrari>=2)
+                    {
+                        printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                    }
+                    break;
+                case 3:
+                    contAudi++;
+                    if(contAudi>=2)
+                    {
+                        printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                    }
+                    break;
+                case 4:
+                    contOtro++;
+                    if(contOtro>=2)
+                    {
+                        printf("\n%d---%s---%s---%s---%s---%d---%s\n",listaP[i].idPropietario,listaP[i].nombre,listaP[i].apellido,listaP[i].direccion,listaP[i].tarjeta,listaP[i].edad,listaA[i].patente);
+                    }
+                    break;
+            }
+        }
+    }
+    retorno = 0;
+    return retorno;
 }

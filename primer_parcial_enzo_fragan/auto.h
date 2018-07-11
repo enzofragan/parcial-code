@@ -60,3 +60,7 @@ int eAu_propietarioDeAutos(eAuto listaA[],int limite,ePropietario listaP[]);
 int eAu_mostrarListaDeAudi(eAuto listaA[],int limite,ePropietario listaP[],eEgreso egreso[]);
 
 int eAu_mostrarListaPorPatente(eAuto listaA[],int limite);
+
+int eAu_max(eAuto listaA[],int limite,ePropietario listaP[],eEgreso egreso[]);
+
+int eAu_propientarioMasDeUno(eAuto listaA[],int limite,ePropietario listaP[]);
